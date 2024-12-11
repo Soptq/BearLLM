@@ -2,34 +2,35 @@ name: Sync Repo
 
 on:
   schedule:
-    # 每小时检查一次目标 repo 是否有更新
     - cron: "0 * * * *"
-  workflow_dispatch: # 手动触发
+  workflow_dispatch:
 
 jobs:
   sync:
     runs-on: ubuntu-latest
 
     steps:
-      # 检出当前 repo
       - name: Checkout This Repo
         uses: actions/checkout@v3
 
-      # 检出目标 repo
       - name: Checkout Target Repo
         uses: actions/checkout@v3
         with:
           repository: RotCHM/RotCHM
-          ref: main # 替换为目标 repo 的分支名称
+          ref: main
 
-      # 同步代码
       - name: Sync Code
         run: |
           rsync -av --delete ./ ./../sync/
           cd ../sync/
-          git config user.name "Haotian Peng"
-          git config user.email "penghaotian@sia.cn"
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
           git add .
           git commit -m "Sync from upstream repo" || echo "No changes to commit"
+
+      - name: Force Pull and Push Changes
+        run: |
           git remote set-url origin https://hatton613:${{ secrets.PAT }}@github.com/hatton613/BearLLM.git
-          git push origin main
+          git fetch origin main
+          git reset --hard origin/main
+          git push origin main --force
