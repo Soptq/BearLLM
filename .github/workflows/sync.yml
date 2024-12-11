@@ -31,4 +31,5 @@ jobs:
           git config user.email "penghaotian@sia.cn"
           git add .
           git commit -m "Sync from upstream repo" || echo "No changes to commit"
-          git push origin main # 替换为你的分支名称
+          git remote set-url origin https://hatton613:${{ secrets.PAT }}@github.com/hatton613/BearLLM.git
+          git push origin main
