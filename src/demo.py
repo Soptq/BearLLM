@@ -4,7 +4,7 @@ from peft import PeftModel
 from transformers import AutoTokenizer
 from fine_tuning import description_len, signal_token_id, get_bearllm, mod_xt_for_qwen
 import numpy as np
-from BearLLM.functions.dcn import dcn
+from functions.dcn import dcn
 
 query_signal_file = 'xxx.npy'  # Replace with the path of the vibration signal file
 reference_signal_file = 'xxx.npy'  # Replace with the path of the vibration signal file

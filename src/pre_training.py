@@ -1,19 +1,19 @@
 import torch
 from dotenv import dotenv_values
 
-from BearLLM.functions.mbhm import mbhm_vibration_dataloader as mbhm_loader
-from BearLLM.models.FCN import FaultClassificationNetwork as FCN
+from functions.mbhm import mbhm_vibration_dataloader as mbhm_loader
+from models.FCN import FaultClassificationNetwork as FCN
 
 
 class HyperParameters:
     def __init__(self):
         self.batch_size = 1024
-        self.num_workers = 10
+        self.num_workers = 0
         self.lr = 1e-4
         self.lr_patience = 150
         self.lr_factor = 0.5
         self.epoch_max = 50
-        self.device = 'cuda'
+        self.device = 'cpu'
 
 
 class PreTrainner:
